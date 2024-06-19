@@ -4,19 +4,17 @@ conda_env: conda.yml
 entry_points:
   main:
     parameters:
-
       parameter1:
-        description:"first parameter" ## ADD DESCRIPTION
+        description: "first parameter"         ## ADD DESCRIPTION
         type: int
 
       parameter2:
-        description: "second parameter"## ADD DESCRIPTION
+        description: "second parameter"        ## ADD DESCRIPTION
         type: int
 
       parameter3:
-        description: "third parameter"## ADD DESCRIPTION
+        description: "third parameter"         ## ADD DESCRIPTION
         type: str
 
-
     command: >-
-        python run.py  --parameter1 {parameter1}  --parameter2 {parameter2}  --parameter3 {parameter3} 
+        python run.py  --parameter1 {parameter1}  --parameter2 {parameter2}  --parameter3 {parameter3}

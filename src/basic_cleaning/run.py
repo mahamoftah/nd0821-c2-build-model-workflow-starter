@@ -58,7 +58,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--parameter2", 
         type=int,                     ## INSERT TYPE HERE: str, float or int,
-        help="param2"                       ## INSERT DESCRIPTION HERE,
+        help="param2",                       ## INSERT DESCRIPTION HERE,
         required=True
     )
 
