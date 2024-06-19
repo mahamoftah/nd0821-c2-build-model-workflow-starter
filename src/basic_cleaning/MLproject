@@ -4,17 +4,21 @@ conda_env: conda.yml
 entry_points:
   main:
     parameters:
-      csv:
-        description: Input CSV file to be tested
-        type: string
+      input_artifact:
+        description: input artifact name
+        type: str
 
-      ref:
-        description: Reference CSV file to compare the new csv to
-        type: string
+      output_artifact:
+        description: output artifact name
+        type: str
 
-      kl_threshold:
-        description: Threshold for the KL divergence test on the neighborhood group column
-        type: float
+      output_type:
+        description: artifact type
+        type: str
+
+      output_description:
+        description: description of the output artifact
+        type: str
 
       min_price:
         description: Minimum accepted price
@@ -24,5 +28,10 @@ entry_points:
         description: Maximum accepted price
         type: float
 
-    command: "pytest . -vv --csv {csv} --ref {ref} --kl_threshold {kl_threshold} --min_price {min_price} --max_price {max_price}"
-
+    command: >-
+      python run.py --input_artifact {input_artifact} \
+                    --output_artifact {output_artifact} \
+                    --output_type {output_type} \
+                    --output_description {output_description} \
+                    --min_price {min_price} \
+                    --max_price {max_price}
