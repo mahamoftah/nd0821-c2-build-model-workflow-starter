@@ -25,8 +25,10 @@ def go(args):
     # YOUR CODE HERE     #
     ######################
 
-    path = run.use_artifact(args.input_artifact).file()
+    # print("Command runs successfully")
+    # print("Parameters: ", args.parameter1, " ", args.parameter2, " ", args.parameter3)
 
+    path = run.use_artifact(args.input_artifact).file()
     df = pd.read_csv(path)
     cleaned_df = df.dropna()
 

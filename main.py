@@ -52,7 +52,18 @@ def go(config: DictConfig):
             ##################
             # Implement here #
             ##################
+            # _ = mlflow.run(
+            #     f"sample.csv",
+            #     "main",
+            #     parameters={
+            #         "sample": config["etl"]["sample"],
+            #         "artifact_name": "cleaned_df.csv",
+            #         "artifact_type": "raw_data",
+            #         "artifact_description": "Cleaned_Data"
+            #     },
+            # )
             pass
+            
 
         if "data_check" in active_steps:
             ##################
