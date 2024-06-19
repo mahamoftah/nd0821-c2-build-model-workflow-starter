@@ -30,19 +30,28 @@ def go(args):
 
     path = run.use_artifact(args.input_artifact).file()
     df = pd.read_csv(path)
-    cleaned_df = df.dropna()
+
+    # Drop outliers
+    min_price = 10
+    max_price = 350
+    idx = df['price'].between(min_price, max_price)
+    df = df[idx].copy()
+    # Convert last_review to datetime
+    df['last_review'] = pd.to_datetime(df['last_review'])
+
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
+    df.to_csv("clean_sample.csv", index=False)
 
     artifact = wandb.Artifact(
-        name="cleaned_df",
-        type="cleaned_df",
-        description="Data Preprocessing"
+      args.output_artifact,
+      type=args.output_type,
+      description=args.output_description,
     )
-
-    path_ = "cleaned_df.csv"
-    cleaned_df.to_csv(path_, index=False)
-    artifact.add_file(path_)
-
+    artifact.add_file("clean_sample.csv")
     run.log_artifact(artifact)
+
 
 
 if __name__ == "__main__":
@@ -50,24 +59,46 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A very basic data cleaning")
 
 
+
     parser.add_argument(
-        "--parameter1", 
-        type=int,                    ## INSERT TYPE HERE: str, float or int,
-        help="param 1",                   ## INSERT DESCRIPTION HERE,
+        "--input_artifact", 
+        type=str,
+        help="Input artifact name (format: artifact_name:version)",
         required=True
     )
 
     parser.add_argument(
-        "--parameter2", 
-        type=int,                     ## INSERT TYPE HERE: str, float or int,
-        help="param2",                       ## INSERT DESCRIPTION HERE,
+        "--output_artifact", 
+        type=str,
+        help="Output artifact name",
         required=True
     )
 
     parser.add_argument(
-        "--parameter3", 
-        type=str,                   ## INSERT TYPE HERE: str, float or int,
-        help="param 3",                   ## INSERT DESCRIPTION HERE,
+        "--output_type", 
+        type=str,
+        help="Output artifact type",
+        required=True
+    )
+
+    parser.add_argument(
+        "--output_description", 
+        type=str,
+        help="Description of the output artifact",
+        required=True
+    )
+
+    parser.add_argument(
+        "--min_price", 
+        type=float,
+        help="Minimum price threshold",
+        required=True
+    )
+
+    parser.add_argument(
+        "--max_price", 
+        type=float,
+        help="Maximum price threshold",
         required=True
     )
 
