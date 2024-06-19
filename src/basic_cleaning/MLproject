@@ -7,11 +7,11 @@ entry_points:
 
       parameter1:
         description:"first parameter" ## ADD DESCRIPTION
-        type: str
+        type: int
 
       parameter2:
         description: "second parameter"## ADD DESCRIPTION
-        type: str
+        type: int
 
       parameter3:
         description: "third parameter"## ADD DESCRIPTION
