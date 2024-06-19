@@ -6,16 +6,16 @@ entry_points:
     parameters:
 
       parameter1:
-        description: ## ADD DESCRIPTION
-        type: string
+        description:"first parameter" ## ADD DESCRIPTION
+        type: str
 
       parameter2:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: "second parameter"## ADD DESCRIPTION
+        type: str
 
       parameter3:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: "third parameter"## ADD DESCRIPTION
+        type: str
 
 
     command: >-
