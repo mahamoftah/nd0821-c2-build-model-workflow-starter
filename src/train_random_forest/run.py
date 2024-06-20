@@ -201,7 +201,18 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
 
     processed_features = ordinal_categorical + non_ordinal_categorical + zero_imputed + ["last_review", "name"]
 
-    # Create random forest
+
+    with open(args.rf_config) as fp:
+        rf_config = json.load(fp)
+
+    # Update the criterion parameter if it is set to an invalid value
+    if rf_config.get('criterion') == 'mae':
+        rf_config['criterion'] = 'absolute_error'
+
+    go.config.update(rf_config)
+
+
+
     random_forest = RandomForestRegressor(**rf_config)
 
     # Create the inference pipeline
