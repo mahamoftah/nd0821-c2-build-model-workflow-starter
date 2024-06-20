@@ -209,10 +209,6 @@ def get_inference_pipeline(rf_config, max_tfidf_features):
     if rf_config.get('criterion') == 'mae':
         rf_config['criterion'] = 'absolute_error'
 
-    go.config.update(rf_config)
-
-
-
     random_forest = RandomForestRegressor(**rf_config)
 
     # Create the inference pipeline
