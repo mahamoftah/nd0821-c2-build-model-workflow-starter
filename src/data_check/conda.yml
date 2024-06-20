@@ -5,7 +5,8 @@ channels:
 dependencies:
   - pandas=2.0.3
   - pytest=7.4.4
-  - scipy=1.13.1
+  - scipy=1.13.
+  - hydra-core
   - pip=23.3.2
   - pip:
       - wandb==0.17.2
